@@ -28,12 +28,12 @@ def insert_data(**data):
     check_query = ""
     update_query = ""
     for k, v in data.items():
-        if k == "table" and v == "issue_comment":
-            query = "INSERT INTO issue_comment(COMMENTID,COMMENT,USER,REACTIONS)" \
+        if k == "table" and v == "issue_comment1":
+            query = "INSERT INTO issue_comment1(COMMENTID,COMMENT,USER,REACTIONS)" \
                     "VALUES(%s,%s,%s,%s)"
             continue
-        elif k == "table" and v == "issue":
-            query = "INSERT INTO issue(ISSUEID,REPO_NAME,COMMENTID,TITLE,STARTDATE,ENDDATE," \
+        elif k == "table" and v == "issue1":
+            query = "INSERT INTO issue1(ISSUEID,REPO_NAME,COMMENTID,TITLE,STARTDATE,ENDDATE," \
                     "DAYS_NEEDED,ISSUETYPE,ASSIGNEE)" \
                     "VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
             continue
