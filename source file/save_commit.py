@@ -61,7 +61,7 @@ def save_gitcommits():
         except Exception as e:
                print(e)
                continue
-           
+
     db.close()
     cursor.close()
     f.close()
