@@ -11,7 +11,7 @@ load_dotenv()
 username = "root"
 password = "Saigon12345"
 database = "intemodb"
-token = "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"
+token = "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"
 url = "https://github.com/ChuDucAnh2402/hello-world.git"
 db = mysql.connector.connect(host="localhost", user=username, password=password, database=database)
 cursor = db.cursor(buffered=True)

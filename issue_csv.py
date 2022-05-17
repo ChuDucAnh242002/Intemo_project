@@ -5,7 +5,7 @@ import mysql.connector
 username = "root"
 password = "Saigon12345"
 database = "intemodb"
-token = "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"
+#token = "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"
 url = "https://github.com/ChuDucAnh2402/hello-world.git"
 db = mysql.connector.connect(host="localhost", user=username, password=password, database=database)
 cursor = db.cursor(buffered=True)
