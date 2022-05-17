@@ -1,16 +1,16 @@
 from github import Github
 import mysql.connector
-import re
-import csv
-import sys
+# import re
+# import csv
+# import sys
 import os
-from os import path
-import shutil
+# from os import path
+# import shutil
 from dotenv import load_dotenv
-from textblob import TextBlob
-import text2emotion as t
-from ast import literal_eval
-import pdb
+# from textblob import TextBlob
+# import text2emotion as t
+# from ast import literal_eval
+# import pdb
 #pdb.set_trace()
 load_dotenv()
 username = os.getenv("user")
