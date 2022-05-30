@@ -29,8 +29,8 @@ def insert_data(**data):
     update_query = ""
     for k, v in data.items():
         if k == "table" and v == "issue_comment1":
-            query = "INSERT INTO issue_comment1(COMMENTID,COMMENT,USER,REACTIONS)" \
-                    "VALUES(%s,%s,%s,%s)"
+            query = "INSERT INTO issue_comment1(COMMENTID,COMMENT,USER,REACTIONS,CREATEDATE)" \
+                    "VALUES(%s,%s,%s,%s,%s)"
             continue
         elif k == "table" and v == "issue1":
             query = "INSERT INTO issue1(ISSUEID,REPO_NAME,COMMENTID,TITLE,STARTDATE,ENDDATE," \
@@ -114,13 +114,13 @@ def fetch_gitdetails(org_repo):
                                   title=issue.title, start_date=start_date, end_date=end_date,\
                                   days_needed=hours,issuetype=label, assignee=assignee)
                       insert_data(table="issue_comment1", commentid=comment.id,\
-                                  comment=comment.body, user=commenter, reactions=reactions)
+                                  comment=comment.body, user=commenter, reactions=reactions, create_date = comment.created_at)
                    else:
                       insert_data(table="issue1", issueid=number,repo=org_repo,commentid=comment.id,\
                                   title=issue.title, start_date=start_date, end_date=end_date,\
                                        days_needed=hours, issuetype=label, assignee=assignee)
                       insert_data(table="issue_comment1", commentid=comment.id,\
-                                  comment=comment.body, user=commenter, reactions=0)
+                                  comment=comment.body, user=commenter, reactions=0, create_date = comment.created_at)
 
     finally:
             issue_stat_user = {k: v for k, v in sorted(issue_user.items(), key=lambda item: item[1])}

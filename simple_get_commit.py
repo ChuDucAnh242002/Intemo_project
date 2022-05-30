@@ -54,8 +54,9 @@ def insert_gitcommits(repo):
                 # first_index = re.search("\(#[0-9]+\)",commit_comments).start()
                 # last_index = re.search("\(#[0-9]+\)",commit_comments).end()
                 issue = commit_comments[1:2]
-                if type(issue) != int:
+                if not issue.isnumeric():
                     issue = 0
+                print(issue)
 
             print("Commit {} has comments {} by {} on {} with files {} for issue {} with {} changes".format(
                                         commit_id, commit_comments, commit_author, commit_date, commit_files, issue, sum_commit))
