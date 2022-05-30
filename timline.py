@@ -20,7 +20,7 @@ db = mysql.connector.connect(host="localhost",user=username, password=password, 
 cursor = db.cursor(buffered=True)
 
 date_fmt = "%m/%d/%Y"
-check_query = "SECECT * FROM timeline WHERE repo_name = %s and issueid = %s and commitid = %s"
+check_query = "SELECT * FROM timeline WHERE repo_name = %s and issueid = %s and commitid = %s"
 insert_query = "INSERT INTO timeline(repo_name, issueid, title, startdate, enddate, days_needed, commitid, commit_comments, commit_date) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
 join_query = "SELECT DISTINCT i.repo_name, i.issueid, i.title, i.startdate, i.enddate, i.days_needed, c.commitid, c.comments, c.date FROM issue i inner join commit c on (i.issueid = c.issue and i.repo_name = c.repo) ORDER BY i.repo_name, i.issueid"

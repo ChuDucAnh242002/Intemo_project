@@ -12,7 +12,7 @@ load_dotenv()
 username = "root"
 password = "Saigon12345"
 database = "intemodb"
-token = "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"
+token = "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"
 url = "https://github.com/ChuDucAnh2402/hello-world.git"
 db = mysql.connector.connect(host="localhost", user=username, password=password, database=database)
 cursor = db.cursor(buffered=True)
@@ -51,10 +51,12 @@ def insert_gitcommits(repo):
         
         try:
             if commit_comments:
-                print(commit_comments)
-                first_index = re.search("\(#[0-9]+\)",commit_comments).start()
-                last_index = re.search("\(#[0-9]+\)",commit_comments).end()
-                issue = commit_comments[first_index+2:last_index-1]
+                # first_index = re.search("\(#[0-9]+\)",commit_comments).start()
+                # last_index = re.search("\(#[0-9]+\)",commit_comments).end()
+                issue = commit_comments[1:2]
+                if type(issue) != int:
+                    issue = 0
+
             print("Commit {} has comments {} by {} on {} with files {} for issue {} with {} changes".format(
                                         commit_id, commit_comments, commit_author, commit_date, commit_files, issue, sum_commit))
             data = (commit_id, commit_comments, commit_author, commit_date, sum_commit, issue, repo)
