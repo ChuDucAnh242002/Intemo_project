@@ -14,14 +14,14 @@ def save_timeline():
     path = "csv/timeline.csv"
     f = open(path, "w", encoding="utf-8", newline="")
     writer = csv.writer(f)
-    header = ['issue#', 'commit_id', 'commit_date', 'title']
+    header = ['issue#', 'issue_startdate', 'issue_enddate', 'issue_commentid', 'issue_commentdate', 'commit_id', 'commit_date']
     writer.writerow(header)
 
     cursor.execute(query)
     record = cursor.fetchall()
     for r in record:
         try:
-            data = [r[0], r[1], r[2], r[3]]
+            data = [r[0], r[1], r[2], r[3], r[4], r[5], r[6]]
             writer.writerow(data)
         except Exception as e:
             print(e)
