@@ -24,8 +24,8 @@ insert_query = "insert into timeline1(issueid, commitid, commitdate, title) valu
 commit_query = "SELECT issue, commitid, date from commit1 order by issue, date"
 issue_query = "SELECT issueid, title from issue1 order by issueid" """
 
-join_query = "select i.issueid, i.startdate, i.enddate, ic.commentid, ic.createdate, c.commitid, c.date from issue1 i inner join issue_comment1 ic on i.commentid = ic.commentid inner join commit1 c on i.issueid = c.issue order by i.issueid, ic.createdate, c.date"
-insert_query = "insert into timeline1(issueid, issuesd, issueed, issuecommentid, issuecommentdate, commitid, commitdate) value(%s, %s, %s, %s, %s, %s, %s)"
+join_query = "SELECT i.issueid, i.startdate, i.enddate, ic.commentid, ic.createdate, c.commitid, c.date FROM issue1 i INNER JOIN issue_comment1 ic on i.commentid = ic.commentid INNER JOIN commit1 c on i.issueid = c.issue order by i.issueid, ic.createdate, c.date"
+insert_query = "INSERT INTO timeline1(issueid, issuesd, issueed, issuecommentid, issuecommentdate, commitid, commitdate) value(%s, %s, %s, %s, %s, %s, %s)"
 
 def insert_timeline():
     """ cursor.execute(commit_query)

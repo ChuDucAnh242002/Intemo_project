@@ -21,9 +21,9 @@ cursor = db.cursor(buffered=True)
 
 date_fmt = "%m/%d/%Y"
 check_query = "SELECT * FROM timeline WHERE repo_name = %s and issueid = %s and commitid = %s"
-insert_query = "INSERT INTO timeline(repo_name, issueid, title, startdate, enddate, days_needed, commitid, commit_comments, commit_date) values(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+insert_query = "INSERT INTO timeline(repo_name, issueid, title, startdate, enddate, days_needed, issuecommentid, issuecommentdate, commitid, commit_comments, commit_date) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
 
-join_query = "SELECT DISTINCT i.repo_name, i.issueid, i.title, i.startdate, i.enddate, i.days_needed, c.commitid, c.comments, c.date FROM issue i inner join commit c on (i.issueid = c.issue and i.repo_name = c.repo) ORDER BY i.repo_name, i.issueid"
+join_query = "SELECT DISTINCT i.repo_name, i.issueid, i.title, i.startdate, i.enddate, i.days_needed, ic.commentid, ic.createdate, c.commitid, c.comments, c.date FROM issue i INNER JOIN issue_comment ic on i.commentid = ic.commentid INNER JOIN commit c on (i.issueid = c.issue and i.repo_name = c.repo) ORDER BY i.repo_name, i.issueid, ic.commentid, c.date"
 
 def insert_timeline():
     """ 
@@ -41,10 +41,12 @@ def insert_timeline():
             startdate = r[3]
             enddate = r[4]
             days_needed = r[5]
-            commit_id = r[6]
-            commit_comments = r[7]
-            commit_date = r[8]
-            data = [repo_name, issue_id, issue_title, startdate, enddate, days_needed, commit_id, commit_comments, commit_date]
+            issue_commentid = r[6]
+            issue_commentdate = r[7]
+            commit_id = r[8]
+            commit_comments = r[9]
+            commit_date = r[10]
+            data = [repo_name, issue_id, issue_title, startdate, enddate, days_needed, issue_commentid, issue_commentdate, commit_id, commit_comments, commit_date]
             cursor.execute(check_query, (repo_name, issue_id, commit_id))
             if( cursor.rowcount > 0 ):
                 print("Issue already have this commit timeline")
