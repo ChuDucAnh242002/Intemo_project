@@ -24,8 +24,8 @@ insert_query = "insert into timeline1(issueid, commitid, commitdate, title) valu
 commit_query = "SELECT issue, commitid, date from commit1 order by issue, date"
 issue_query = "SELECT issueid, title from issue1 order by issueid" """
 
-join_query = "select i.issueid, c.commitid, c.date, i.title from issue1 i inner join commit1 c on i.issueid = c.issue order by i.issueid, c.date;"
-insert_query = "insert into timeline1(issueid, commitid, commitdate, title) value(%s, %s, %s, %s)"
+join_query = "select i.issueid, i.startdate, i.enddate, ic.commentid, ic.createdate, c.commitid, c.date from issue1 i inner join issue_comment1 ic on i.commentid = ic.commentid inner join commit1 c on i.issueid = c.issue order by i.issueid, ic.createdate, c.date"
+insert_query = "insert into timeline1(issueid, issuesd, issueed, issuecommentid, issuecommentdate, commitid, commitdate) value(%s, %s, %s, %s, %s, %s, %s)"
 
 def insert_timeline():
     """ cursor.execute(commit_query)
@@ -63,11 +63,14 @@ def insert_timeline():
     commit_record = cursor.fetchall()
     for r in commit_record:
         try:
-            issue = r[0]
-            commit_id = r[1]
-            commit_date = r[2]
-            issue_title = r[3]
-            data = [issue, commit_id, commit_date, issue_title]
+            issue_id = r[0]
+            issue_sd = r[1]
+            issue_ed = r[2]
+            issue_commentid = r[3]
+            issue_commentdate = r[4]
+            commit_id = r[5]
+            commit_date = r[6]
+            data = [issue_id, issue_sd, issue_ed, issue_commentid, issue_commentdate, commit_id, commit_date]
             cursor.execute(insert_query, data)
             print("Row inserted {}".format(cursor.rowcount))
             db.commit()
